@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadisticas - COSSMIL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @keyframes fade-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { opacity: 0; transform: translateY(10px); animation: fade-in 0.5s ease forwards; }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
+
+    <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-4">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </a>
+            <h1 class="text-3xl font-extrabold text-white">
+                <i class="fa-solid fa-chart-bar mr-2 text-purple-400"></i>ESTADISTICAS
+            </h1>
+            <h2 class="text-xl font-bold gradient-text">- COSSMIL -</h2>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in">
+                <div class="text-gray-400 text-xs uppercase mb-1">Dias Totales</div>
+                <div class="text-green-400 text-xl font-bold" id="stat-totales">45</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.1s">
+                <div class="text-gray-400 text-xs uppercase mb-1">Dias Restantes</div>
+                <div class="text-yellow-400 text-xl font-bold" id="stat-restantes">45</div>
+            </div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.2s">
+            <h3 class="text-white font-bold mb-4">
+                <i class="fa-solid fa-calendar-week mr-2 text-blue-400"></i>Progreso Semanal
+            </h3>
+            <div class="grid grid-cols-9 gap-2" id="semanas-grid"></div>
+            <p class="text-gray-500 text-xs mt-3 text-center">Cada cuadro = 1 semana (5 dias)</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.3s">
+            <h3 class="text-white font-bold mb-4">
+                <i class="fa-solid fa-clock mr-2 text-yellow-400"></i>Proximo Dia Habil
+            </h3>
+            <div class="text-2xl font-bold text-green-400" id="stat-proximo">--/--/----</div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.4s">
+            <h3 class="text-white font-bold mb-4">
+                <i class="fa-solid fa-fire mr-2 text-orange-400"></i>Racha Actual
+            </h3>
+            <div class="text-2xl font-bold text-orange-400" id="stat-racha">0 dias consecutivos</div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.5s">
+            <h3 class="text-white font-bold mb-4">
+                <i class="fa-solid fa-calendar-xmark mr-2 text-red-400"></i>Dias Excluidos
+            </h3>
+            <div class="text-gray-400 text-sm" id="stat-descartados">Ninguno</div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur rounded-xl p-4 border border-white/10 fade-in" style="animation-delay: 0.6s">
+            <h3 class="text-sm font-bold text-white mb-3">
+                <i class="fa-solid fa-gear mr-2 text-gray-400"></i>Configuracion (JSON)
+            </h3>
+            <textarea id="json-config" class="w-full bg-slate-800 text-green-400 font-mono text-xs p-3 rounded-lg border border-slate-600 focus:border-purple-500 focus:outline-none h-32 resize-none"></textarea>
+            <div class="flex gap-3 mt-3">
+                <button onclick="guardarConfig()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm">
+                    <i class="fa-solid fa-check mr-1"></i>Guardar
+                </button>
+                <button onclick="resetearConfig()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1.5 rounded-lg text-sm">
+                    <i class="fa-solid fa-rotate-left mr-1"></i>Resetear
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-8 text-gray-500 text-xs text-center">
+        Copyright ArtyomStkr
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        function actualizarStats() {
+            const { dias, pct } = calcularProgreso();
+            const diasRestantes = config.dias_totales - dias;
+            const semanasCompletas = Math.floor(dias / 5);
+            const semanasTotales = Math.ceil(config.dias_totales / 5);
+
+            document.getElementById('stat-totales').textContent = config.dias_totales;
+            document.getElementById('stat-restantes').textContent = Math.max(diasRestantes, 0);
+
+            const semanasGrid = document.getElementById('semanas-grid');
+            semanasGrid.innerHTML = '';
+            for (let i = 1; i <= semanasTotales; i++) {
+                const div = document.createElement('div');
+                div.className = `w-full aspect-square rounded-lg flex items-center justify-center font-bold text-xs ${
+                    i <= semanasCompletas 
+                        ? 'bg-green-500 text-white' 
+                        : i === semanasCompletas + 1 
+                            ? 'bg-yellow-500 text-white' 
+                            : 'bg-gray-700 text-gray-400'
+                }`;
+                div.textContent = i;
+                semanasGrid.appendChild(div);
+            }
+
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            let proximoDia = new Date(hoy);
+            proximoDia.setDate(proximoDia.getDate() + 1);
+            while (!esDiaLaborable(proximoDia)) {
+                proximoDia.setDate(proximoDia.getDate() + 1);
+            }
+            document.getElementById('stat-proximo').textContent = formatearFecha(proximoDia);
+
+            let racha = 0, diaCheck = new Date(hoy);
+            diaCheck.setDate(diaCheck.getDate() - 1);
+            while (esDiaLaborable(diaCheck)) { racha++; diaCheck.setDate(diaCheck.getDate() - 1); }
+            document.getElementById('stat-racha').textContent = racha > 0 ? `${racha} dias consecutivos` : 'Sin racha activa';
+
+            const descartados = config.dias_descartados || [];
+            document.getElementById('stat-descartados').textContent = descartados.length > 0 
+                ? descartados.join(', ') 
+                : 'Ninguno';
+        }
+
+        document.addEventListener('DOMContentLoaded', actualizarStats);
+    </script>
+</body>
+</html>
