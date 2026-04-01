@@ -33,59 +33,59 @@
             <h2 class="text-xl font-bold gradient-text">- COSSMIL -</h2>
         </div>
 
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-4 fade-in">
+            <h3 class="text-white font-bold mb-4">
+                <i class="fa-solid fa-calendar mr-2 text-purple-400"></i>Fecha de Inicio
+            </h3>
+            <input type="date" id="input-inicio" class="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 outline-none">
+        </div>
+
         <div class="grid grid-cols-2 gap-4 mb-6">
             <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in">
-                <div class="text-gray-400 text-xs uppercase mb-1">Dias Totales</div>
-                <div class="text-green-400 text-xl font-bold" id="stat-totales">45</div>
+                <div class="text-gray-400 text-xs uppercase mb-1">Horas Totales</div>
+                <div class="text-green-400 text-xl font-bold" id="stat-horas">340h</div>
             </div>
             <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.1s">
-                <div class="text-gray-400 text-xs uppercase mb-1">Dias Restantes</div>
-                <div class="text-yellow-400 text-xl font-bold" id="stat-restantes">45</div>
+                <div class="text-gray-400 text-xs uppercase mb-1">Horas Restantes</div>
+                <div class="text-yellow-400 text-xl font-bold" id="stat-horas-restantes">340h</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.2s">
+                <div class="text-gray-400 text-xs uppercase mb-1">Dias Laborales</div>
+                <div class="text-blue-400 text-xl font-bold" id="stat-dias">43</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.3s">
+                <div class="text-gray-400 text-xs uppercase mb-1">Fecha Final</div>
+                <div class="text-purple-400 text-xl font-bold" id="stat-final">--/--/----</div>
             </div>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.2s">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.4s">
             <h3 class="text-white font-bold mb-4">
                 <i class="fa-solid fa-calendar-week mr-2 text-blue-400"></i>Progreso Semanal
             </h3>
             <div class="grid grid-cols-9 gap-2" id="semanas-grid"></div>
-            <p class="text-gray-500 text-xs mt-3 text-center">Cada cuadro = 1 semana (5 dias)</p>
+            <p class="text-gray-500 text-xs mt-3 text-center">Cada cuadro = 1 semana</p>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.3s">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.5s">
             <h3 class="text-white font-bold mb-4">
                 <i class="fa-solid fa-clock mr-2 text-yellow-400"></i>Proximo Dia Habil
             </h3>
             <div class="text-2xl font-bold text-green-400" id="stat-proximo">--/--/----</div>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.4s">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.6s">
             <h3 class="text-white font-bold mb-4">
                 <i class="fa-solid fa-fire mr-2 text-orange-400"></i>Racha Actual
             </h3>
-            <div class="text-2xl font-bold text-orange-400" id="stat-racha">0 dias consecutivos</div>
+            <div class="text-2xl font-bold text-orange-400" id="stat-racha">0 dias</div>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.5s">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 fade-in" style="animation-delay: 0.7s">
             <h3 class="text-white font-bold mb-4">
                 <i class="fa-solid fa-calendar-xmark mr-2 text-red-400"></i>Dias Excluidos
             </h3>
             <div class="text-gray-400 text-sm" id="stat-descartados">Ninguno</div>
-        </div>
-
-        <div class="bg-white/5 backdrop-blur rounded-xl p-4 border border-white/10 fade-in" style="animation-delay: 0.6s">
-            <h3 class="text-sm font-bold text-white mb-3">
-                <i class="fa-solid fa-gear mr-2 text-gray-400"></i>Configuracion (JSON)
-            </h3>
-            <textarea id="json-config" class="w-full bg-slate-800 text-green-400 font-mono text-xs p-3 rounded-lg border border-slate-600 focus:border-purple-500 focus:outline-none h-32 resize-none"></textarea>
-            <div class="flex gap-3 mt-3">
-                <button onclick="guardarConfig()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-lg text-sm">
-                    <i class="fa-solid fa-check mr-1"></i>Guardar
-                </button>
-                <button onclick="resetearConfig()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1.5 rounded-lg text-sm">
-                    <i class="fa-solid fa-rotate-left mr-1"></i>Resetear
-                </button>
-            </div>
         </div>
     </div>
 
@@ -96,13 +96,17 @@
     <script src="js/app.js"></script>
     <script>
         function actualizarStats() {
-            const { dias, pct } = calcularProgreso();
-            const diasRestantes = config.dias_totales - dias;
+            const { dias } = calcularProgreso();
+            const diasTotales = getDiasLaborablesTotales();
+            const horasCompletadas = dias * config.horas_por_dia;
+            const horasRestantes = config.horas_totales - horasCompletadas;
             const semanasCompletas = Math.floor(dias / 5);
-            const semanasTotales = Math.ceil(config.dias_totales / 5);
+            const semanasTotales = Math.ceil(diasTotales / 5);
 
-            document.getElementById('stat-totales').textContent = config.dias_totales;
-            document.getElementById('stat-restantes').textContent = Math.max(diasRestantes, 0);
+            document.getElementById('stat-horas').textContent = `${config.horas_totales}h`;
+            document.getElementById('stat-horas-restantes').textContent = `${Math.max(horasRestantes, 0)}h`;
+            document.getElementById('stat-dias').textContent = diasTotales;
+            document.getElementById('stat-final').textContent = formatearFecha(calcularFechaFinReal());
 
             const semanasGrid = document.getElementById('semanas-grid');
             semanasGrid.innerHTML = '';
@@ -131,13 +135,24 @@
             let racha = 0, diaCheck = new Date(hoy);
             diaCheck.setDate(diaCheck.getDate() - 1);
             while (esDiaLaborable(diaCheck)) { racha++; diaCheck.setDate(diaCheck.getDate() - 1); }
-            document.getElementById('stat-racha').textContent = racha > 0 ? `${racha} dias consecutivos` : 'Sin racha activa';
+            document.getElementById('stat-racha').textContent = racha > 0 ? `${racha} dias` : 'Sin racha';
 
             const descartados = config.dias_descartados || [];
             document.getElementById('stat-descartados').textContent = descartados.length > 0 
                 ? descartados.join(', ') 
                 : 'Ninguno';
+            
+            const [d, m, y] = config.fecha_inicio.split('/');
+            document.getElementById('input-inicio').value = `${y}-${m}-${d}`;
         }
+
+        document.getElementById('input-inicio').addEventListener('change', (e) => {
+            const [y, m, d] = e.target.value.split('-');
+            config.fecha_inicio = `${d}/${m}/${y}`;
+            localStorage.setItem('pasantiaConfig', JSON.stringify(config));
+            actualizarStats();
+            if (typeof actualizarInterfaz === 'function') actualizarInterfaz();
+        });
 
         document.addEventListener('DOMContentLoaded', actualizarStats);
     </script>

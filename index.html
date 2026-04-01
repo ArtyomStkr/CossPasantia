@@ -36,6 +36,21 @@
             background: rgba(255,255,255,0.2);
             transform: scale(1.05);
         }
+        .btn-config {
+            background: rgba(168,85,247,0.2);
+            border: 1px solid rgba(168,85,247,0.4);
+            transition: all 0.3s;
+        }
+        .btn-config:hover {
+            background: rgba(168,85,247,0.4);
+        }
+        .modal {
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal.hidden-modal {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center justify-center p-4">
@@ -86,11 +101,34 @@
             <canvas id="calendario-canvas" class="rounded-xl"></canvas>
         </div>
 
-        <div class="text-center">
-            <a href="stats.html" class="btn-stats inline-flex items-center gap-2 text-white px-6 py-3 rounded-xl">
+        <div class="flex justify-center gap-3">
+            <button onclick="abrirModal()" class="btn-config inline-flex items-center gap-2 text-purple-300 px-5 py-2.5 rounded-xl">
+                <i class="fa-solid fa-calendar"></i>
+                Cambiar Inicio
+            </button>
+            <a href="stats.html" class="btn-stats inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-xl">
                 <i class="fa-solid fa-chart-bar"></i>
-                Ver Estadisticas
+                Estadisticas
             </a>
+        </div>
+    </div>
+
+    <div id="modal-config" class="modal fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden-modal p-4">
+        <div class="bg-gray-800 rounded-2xl p-6 w-full max-w-sm border border-purple-500/30">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-white">
+                    <i class="fa-solid fa-calendar mr-2 text-purple-400"></i>Fecha de Inicio
+                </h3>
+                <button onclick="cerrarModal()" class="text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <input type="date" id="input-fecha" class="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 outline-none text-center text-lg">
+            
+            <button onclick="guardarFecha()" class="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition-colors">
+                <i class="fa-solid fa-check mr-2"></i>Aplicar
+            </button>
         </div>
     </div>
 
@@ -99,5 +137,31 @@
     </footer>
 
     <script src="js/app.js"></script>
+    <script>
+        function abrirModal() {
+            const modal = document.getElementById('modal-config');
+            const fechaInput = document.getElementById('input-fecha');
+            const [d, m, y] = config.fecha_inicio.split('/');
+            fechaInput.value = `${y}-${m}-${d}`;
+            modal.classList.remove('hidden-modal');
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-config').classList.add('hidden-modal');
+        }
+
+        function guardarFecha() {
+            const fechaStr = document.getElementById('input-fecha').value;
+            const [y, m, d] = fechaStr.split('-');
+            config.fecha_inicio = `${d}/${m}/${y}`;
+            localStorage.setItem('pasantiaConfig', JSON.stringify(config));
+            cerrarModal();
+            actualizarInterfaz();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') cerrarModal();
+        });
+    </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 let config = {
     fecha_inicio: "17/03/2026",
-    dias_totales: 45,
+    horas_totales: 340,
+    horas_por_dia: 8,
     dias_descartados: []
 };
 
@@ -10,6 +11,7 @@ function cargarConfig() {
         .then(data => {
             config = data;
             if (!config.dias_descartados) config.dias_descartados = [];
+            if (!config.horas_por_dia) config.horas_por_dia = 8;
             inicializarApp();
         })
         .catch(() => inicializarApp());
@@ -24,6 +26,10 @@ function formatearFecha(f) {
     return `${String(f.getDate()).padStart(2,'0')}/${String(f.getMonth()+1).padStart(2,'0')}/${f.getFullYear()}`;
 }
 
+function getDiasLaborablesTotales() {
+    return Math.ceil(config.horas_totales / config.horas_por_dia);
+}
+
 function esDiaLaborable(f) {
     if (f.getDay() === 0 || f.getDay() === 6) return false;
     return !config.dias_descartados.includes(formatearFecha(f));
@@ -31,12 +37,30 @@ function esDiaLaborable(f) {
 
 function obtenerDiasLaborables() {
     const dias = [], ini = new Date(parsearFecha(config.fecha_inicio));
+    const diasTotales = getDiasLaborablesTotales();
     let c = 0;
-    while (c < config.dias_totales) {
+    while (c < diasTotales) {
         if (esDiaLaborable(ini)) dias.push({ fecha: new Date(ini), num: c + 1 }), c++;
         ini.setDate(ini.getDate() + 1);
     }
     return dias;
+}
+
+function calcularFechaFinReal() {
+    const diasLaborables = obtenerDiasLaborables();
+    let fin = new Date(parsearFecha(config.fecha_inicio));
+    diasLaborables.forEach(d => fin = d.fecha);
+    let descartadosDespues = new Date(fin);
+    config.dias_descartados.forEach(dStr => {
+        const d = parsearFecha(dStr);
+        if (d > fin) {
+            let tmp = new Date(fin);
+            while (tmp < d) tmp.setDate(tmp.getDate() + 1);
+            while (!esDiaLaborable(tmp) && tmp <= d) tmp.setDate(tmp.getDate() + 1);
+            if (tmp > descartadosDespues) descartadosDespues = tmp;
+        }
+    });
+    return descartadosDespues > fin ? descartadosDespues : fin;
 }
 
 function calcularProgreso() {
@@ -44,7 +68,8 @@ function calcularProgreso() {
     hoy.setHours(0, 0, 0, 0);
     let c = 0, act = new Date(ini);
     while (act < hoy) { if (esDiaLaborable(act)) c++; act.setDate(act.getDate() + 1); }
-    return { dias: c, pct: Math.min((c / config.dias_totales) * 100, 100) };
+    const diasTotales = getDiasLaborablesTotales();
+    return { dias: c, pct: Math.min((c / diasTotales) * 100, 100) };
 }
 
 function getColorBarra(pct) {
@@ -85,7 +110,8 @@ function dibujarCalendario() {
 
 function actualizarInterfaz() {
     const { dias, pct } = calcularProgreso();
-    const fin = obtenerDiasLaborables().pop()?.fecha || parsearFecha(config.fecha_inicio);
+    const fin = calcularFechaFinReal();
+    const diasTotales = getDiasLaborablesTotales();
     const color = getColorBarra(pct);
     
     const barra = document.getElementById('barra-progreso');
@@ -94,7 +120,7 @@ function actualizarInterfaz() {
         barra.style.width = `${pct}%`;
     }
     
-    document.getElementById('dias-transcurridos').textContent = `${dias}/${config.dias_totales}`;
+    document.getElementById('dias-transcurridos').textContent = `${dias}/${diasTotales}`;
     document.getElementById('porcentaje').textContent = `${pct.toFixed(1)}%`;
     document.getElementById('fecha-inicio').textContent = config.fecha_inicio;
     document.getElementById('fecha-final').textContent = formatearFecha(fin);
@@ -104,9 +130,10 @@ function actualizarInterfaz() {
 function guardarConfig() {
     try {
         const nueva = JSON.parse(document.getElementById('json-config').value);
-        if (nueva.fecha_inicio && nueva.dias_totales) {
+        if (nueva.fecha_inicio && nueva.horas_totales) {
             config = nueva;
             if (!config.dias_descartados) config.dias_descartados = [];
+            if (!config.horas_por_dia) config.horas_por_dia = 8;
             localStorage.setItem('pasantiaConfig', JSON.stringify(config));
             actualizarInterfaz();
         }
@@ -114,7 +141,7 @@ function guardarConfig() {
 }
 
 function resetearConfig() {
-    config = { fecha_inicio: "17/03/2026", dias_totales: 45, dias_descartados: [] };
+    config = { fecha_inicio: "17/03/2026", horas_totales: 340, horas_por_dia: 8, dias_descartados: [] };
     localStorage.removeItem('pasantiaConfig');
     document.getElementById('json-config').value = JSON.stringify(config, null, 2);
     actualizarInterfaz();
@@ -151,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const g = JSON.parse(guardada);
         config = g;
         if (!config.dias_descartados) config.dias_descartados = [];
+        if (!config.horas_por_dia) config.horas_por_dia = 8;
     }
     cargarConfig();
 });
