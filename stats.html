@@ -23,89 +23,92 @@
 <body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
 
     <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-6">
-            <a href="index.html" class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-4">
+        <div class="text-center mb-4 sm:mb-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-2 sm:mb-4">
                 <i class="fa-solid fa-arrow-left"></i> Volver
             </a>
-            <h1 class="text-3xl font-extrabold text-white">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white">
                 <i class="fa-solid fa-chart-bar mr-2 text-purple-400"></i>ESTADISTICAS
             </h1>
-            <h2 class="text-xl font-bold gradient-text">- COSSMIL -</h2>
+            <h2 class="text-lg sm:text-xl font-bold gradient-text">- COSSMIL -</h2>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-4 fade-in">
-            <h3 class="text-white font-bold mb-4">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 sm:p-5 border border-white/20 mb-4 fade-in">
+            <h3 class="text-white font-bold mb-2 sm:mb-4">
                 <i class="fa-solid fa-calendar mr-2 text-purple-400"></i>Fecha de Inicio
             </h3>
-            <input type="date" id="input-inicio" class="w-full bg-gray-700 text-white rounded-lg p-3 border border-gray-600 focus:border-purple-500 outline-none">
+            <input type="date" id="input-inicio" class="w-full bg-gray-700 text-white rounded-lg p-2 sm:p-3 border border-gray-600 focus:border-purple-500 outline-none text-sm sm:text-base">
         </div>
 
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div class="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4 border border-white/20 fade-in">
                 <div class="text-gray-400 text-xs uppercase mb-1">Horas Totales</div>
-                <div class="text-green-400 text-xl font-bold" id="stat-horas">340h</div>
+                <div class="text-green-400 text-lg sm:text-xl font-bold" id="stat-horas">340h</div>
             </div>
-            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.1s">
+            <div class="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4 border border-white/20 fade-in" style="animation-delay: 0.1s">
+                <div class="text-gray-400 text-xs uppercase mb-1">Horas Cumplidas</div>
+                <div class="text-emerald-400 text-lg sm:text-xl font-bold" id="stat-horas-cumplidas">0h</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4 border border-white/20 fade-in" style="animation-delay: 0.2s">
                 <div class="text-gray-400 text-xs uppercase mb-1">Horas Restantes</div>
-                <div class="text-yellow-400 text-xl font-bold" id="stat-horas-restantes">340h</div>
+                <div class="text-yellow-400 text-lg sm:text-xl font-bold" id="stat-horas-restantes">340h</div>
             </div>
-            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.2s">
+            <div class="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4 border border-white/20 fade-in" style="animation-delay: 0.3s">
                 <div class="text-gray-400 text-xs uppercase mb-1">Dias Laborales</div>
-                <div class="text-blue-400 text-xl font-bold" id="stat-dias">43</div>
+                <div class="text-blue-400 text-lg sm:text-xl font-bold" id="stat-dias">43</div>
             </div>
-            <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20 fade-in" style="animation-delay: 0.3s">
+            <div class="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4 border border-white/20 fade-in" style="animation-delay: 0.4s">
                 <div class="text-gray-400 text-xs uppercase mb-1">Fecha Final</div>
-                <div class="text-purple-400 text-xl font-bold" id="stat-final">--/--/----</div>
+                <div class="text-purple-400 text-base sm:text-xl font-bold" id="stat-final">--/--/----</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur rounded-xl p-3 sm:p-4 border border-white/20 fade-in" style="animation-delay: 0.5s">
+                <div class="text-gray-400 text-xs uppercase mb-1">Dias Cumplidos</div>
+                <div class="text-teal-400 text-lg sm:text-xl font-bold" id="stat-dias-cumplidos">0</div>
             </div>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.4s">
-            <h3 class="text-white font-bold mb-4">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 sm:p-5 border border-white/20 mb-4 sm:mb-6 fade-in" style="animation-delay: 0.4s">
+            <h3 class="text-white font-bold mb-2 sm:mb-4">
                 <i class="fa-solid fa-calendar-week mr-2 text-blue-400"></i>Progreso Semanal
             </h3>
-            <div class="grid grid-cols-9 gap-2" id="semanas-grid"></div>
+            <div class="grid grid-cols-5 sm:grid-cols-9 gap-1 sm:gap-2" id="semanas-grid"></div>
             <p class="text-gray-500 text-xs mt-3 text-center">Cada cuadro = 1 semana</p>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.5s">
-            <h3 class="text-white font-bold mb-4">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 sm:p-5 border border-white/20 mb-4 sm:mb-6 fade-in" style="animation-delay: 0.5s">
+            <h3 class="text-white font-bold mb-2 sm:mb-4">
                 <i class="fa-solid fa-clock mr-2 text-yellow-400"></i>Proximo Dia Habil
             </h3>
-            <div class="text-2xl font-bold text-green-400" id="stat-proximo">--/--/----</div>
+            <div class="text-xl sm:text-2xl font-bold text-green-400" id="stat-proximo">--/--/----</div>
         </div>
 
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 mb-6 fade-in" style="animation-delay: 0.6s">
-            <h3 class="text-white font-bold mb-4">
-                <i class="fa-solid fa-fire mr-2 text-orange-400"></i>Racha Actual
-            </h3>
-            <div class="text-2xl font-bold text-orange-400" id="stat-racha">0 dias</div>
-        </div>
-
-        <div class="bg-white/10 backdrop-blur rounded-xl p-5 border border-white/20 fade-in" style="animation-delay: 0.7s">
-            <h3 class="text-white font-bold mb-4">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 sm:p-5 border border-white/20 fade-in" style="animation-delay: 0.6s">
+            <h3 class="text-white font-bold mb-2 sm:mb-4">
                 <i class="fa-solid fa-calendar-xmark mr-2 text-red-400"></i>Dias Excluidos
             </h3>
-            <div class="text-gray-400 text-sm" id="stat-descartados">Ninguno</div>
+            <div class="text-gray-400 text-xs sm:text-sm" id="stat-descartados">Ninguno</div>
         </div>
     </div>
 
-    <footer class="mt-8 text-gray-500 text-xs text-center">
+    <footer class="mt-6 sm:mt-8 text-gray-500 text-xs text-center">
         Copyright ArtyomStkr
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
     <script>
         function actualizarStats() {
             const { dias } = calcularProgreso();
-            const diasTotales = getDiasLaborablesTotales();
+            const diasLaborablesTotales = Math.ceil(config.horas_totales / config.horas_por_dia);
             const horasCompletadas = dias * config.horas_por_dia;
             const horasRestantes = config.horas_totales - horasCompletadas;
             const semanasCompletas = Math.floor(dias / 5);
-            const semanasTotales = Math.ceil(diasTotales / 5);
+            const semanasTotales = Math.ceil(diasLaborablesTotales / 5);
 
             document.getElementById('stat-horas').textContent = `${config.horas_totales}h`;
+            document.getElementById('stat-horas-cumplidas').textContent = `${horasCompletadas}h`;
             document.getElementById('stat-horas-restantes').textContent = `${Math.max(horasRestantes, 0)}h`;
-            document.getElementById('stat-dias').textContent = diasTotales;
+            document.getElementById('stat-dias').textContent = diasLaborablesTotales;
+            document.getElementById('stat-dias-cumplidos').textContent = dias;
             document.getElementById('stat-final').textContent = formatearFecha(calcularFechaFinReal());
 
             const semanasGrid = document.getElementById('semanas-grid');
@@ -132,11 +135,6 @@
             }
             document.getElementById('stat-proximo').textContent = formatearFecha(proximoDia);
 
-            let racha = 0, diaCheck = new Date(hoy);
-            diaCheck.setDate(diaCheck.getDate() - 1);
-            while (esDiaLaborable(diaCheck)) { racha++; diaCheck.setDate(diaCheck.getDate() - 1); }
-            document.getElementById('stat-racha').textContent = racha > 0 ? `${racha} dias` : 'Sin racha';
-
             const descartados = config.dias_descartados || [];
             document.getElementById('stat-descartados').textContent = descartados.length > 0 
                 ? descartados.join(', ') 
@@ -149,12 +147,13 @@
         document.getElementById('input-inicio').addEventListener('change', (e) => {
             const [y, m, d] = e.target.value.split('-');
             config.fecha_inicio = `${d}/${m}/${y}`;
-            localStorage.setItem('pasantiaConfig', JSON.stringify(config));
+            guardarConfig();
             actualizarStats();
-            if (typeof actualizarInterfaz === 'function') actualizarInterfaz();
         });
 
-        document.addEventListener('DOMContentLoaded', actualizarStats);
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarConfig(actualizarStats);
+        });
     </script>
 </body>
 </html>
