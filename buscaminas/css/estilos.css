@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e293b 0%, #4c1d95 50%, #1e293b 100%);
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    text-align: center;
+    color: #888;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn {
+    display: block;
+    text-align: center;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.1);
+    color: #888;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.footer {
+    margin-top: 50px;
+    color: #555;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Menú dificultad */
+.menu-dificultad {
+    text-align: center;
+    width: 100%;
+}
+
+.menu-dificultad h2 {
+    margin-bottom: 30px;
+    color: #a78bfa;
+    font-size: 1.3rem;
+}
+
+.opciones-dificultad {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.btn-dificultad {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-dificultad:hover {
+    background: rgba(167, 139, 250, 0.2);
+    border-color: #a78bfa;
+    transform: scale(1.02);
+}
+
+.btn-dificultad .nombre {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.btn-dificultad .detalles {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.mt-4 {
+    margin-top: 20px;
+}
+
+/* Juego */
+.juego-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.header-juego {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 15px 20px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.btn-reset {
+    background: #ffd93d;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-reset:hover {
+    transform: scale(1.1);
+}
+
+.btn-flag {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-flag:hover {
+    transform: scale(1.1);
+}
+
+.btn-flag.active {
+    background: #f87171;
+    border-color: #ef4444;
+    box-shadow: 0 0 10px rgba(248, 113, 113, 0.5);
+}
+
+.tablero-container {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px;
+}
+
+.tablero {
+    display: grid;
+    gap: 2px;
+    background: rgba(255,255,255,0.1);
+    padding: 2px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.celda {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: clamp(10px, 2.5vw, 14px);
+    cursor: pointer;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    transition: all 0.1s;
+    color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.celda:hover:not(.revelada):not(.marcada) {
+    background: rgba(255,255,255,0.25);
+}
+
+.celda:active:not(.revelada) {
+    transform: scale(0.95);
+}
+
+.celda.revelada {
+    background: rgba(255,255,255,0.05);
+    cursor: default;
+    border-color: transparent;
+}
+
+.celda.marcada {
+    background: rgba(255,255,255,0.15);
+}
+
+.celda.marcada::after {
+    content: '🚩';
+    font-size: 16px;
+}
+
+.celda-mina::after {
+    content: '💣';
+    font-size: 18px;
+}
+
+.celda.explotada {
+    background: rgba(239, 68, 68, 0.5);
+}
+
+/* Colores números */
+.num-1 { color: #60a5fa; }
+.num-2 { color: #4ade80; }
+.num-3 { color: #f87171; }
+.num-4 { color: #a78bfa; }
+.num-5 { color: #fbbf24; }
+.num-6 { color: #2dd4bf; }
+.num-7 { color: #f472b6; }
+.num-8 { color: #e5e7eb; }
+
+.footer-juego {
+    margin-top: 20px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(76, 29, 149, 0.95));
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    max-width: 90%;
+}
+
+.modal-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-size: 1.1rem;
+    color: #a78bfa;
+    margin-bottom: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 1rem;
+    }
+    
+    .container {
+        padding: 15px 10px;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+    
+    .celda {
+        min-width: 20px;
+        min-height: 20px;
+        font-size: clamp(8px, 2vw, 12px);
+    }
+    
+    .tablero-container {
+        padding: 6px;
+        max-width: calc(100vw - 40px);
+    }
+    
+    .header-juego {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+    
+    .btn-reset,
+    .btn-flag {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+        margin: 10px;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-content p {
+        font-size: 1rem;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+    
+    .footer,
+    .footer-juego {
+        margin-top: 15px;
+    }
+}

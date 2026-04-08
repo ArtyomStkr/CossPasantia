@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscaminas - COSSMIL</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>💣 <span class="gradient-text">BUSCAMINAS</span></h1>
+        <p class="subtitle">Evita las minas y revela todas las celdas</p>
+        
+        <div class="menu">
+            <button id="btn-jugar" class="btn btn-primary">▶ JUGAR</button>
+            <a href="../index.html" class="btn btn-secondary">← VOLVER</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        Copyright ArtyomStkr
+    </footer>
+
+    <script src="js/logica.js"></script>
+    <script>
+        document.getElementById('btn-jugar').addEventListener('click', () => {
+            window.location.href = 'juego.html';
+        });
+    </script>
+</body>
+</html>

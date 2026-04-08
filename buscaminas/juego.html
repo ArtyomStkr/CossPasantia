@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugar Buscaminas - COSSMIL</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>💣 <span class="gradient-text">BUSCAMINAS</span></h1>
+        
+        <div id="menu-dificultad" class="menu-dificultad">
+            <h2>Selecciona la dificultad</h2>
+            
+            <div class="opciones-dificultad">
+                <button class="btn-dificultad" data-dificultad="facil">
+                    <div class="nombre">FÁCIL</div>
+                    <div class="detalles">8×8 · 10 minas</div>
+                </button>
+                
+                <button class="btn-dificultad" data-dificultad="normal">
+                    <div class="nombre">NORMAL</div>
+                    <div class="detalles">10×10 · 20 minas</div>
+                </button>
+                
+                <button class="btn-dificultad" data-dificultad="dificil">
+                    <div class="nombre">DIFÍCIL</div>
+                    <div class="detalles">12×12 · 30 minas</div>
+                </button>
+            </div>
+            
+            <a href="index.html" class="btn btn-secondary mt-4">← VOLVER</a>
+        </div>
+
+        <div id="juego-container" class="juego-container hidden">
+            <div class="header-juego">
+                <span id="mines-count">💣 0</span>
+                <button id="btn-flag" class="btn-flag">🚩</button>
+                <button id="btn-reset" class="btn-reset">😊</button>
+                <span id="timer">⏱️ 0</span>
+            </div>
+            <div class="tablero-container">
+                <div id="tablero" class="tablero"></div>
+            </div>
+            <div class="footer-juego">
+                <a href="index.html" class="btn btn-secondary">← VOLVER</a>
+            </div>
+        </div>
+
+        <div id="modal-resultado" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="resultado-titulo"></h2>
+                <p id="resultado-texto"></p>
+                <p id="resultado-tiempo"></p>
+                <div class="modal-buttons">
+                    <button id="btn-reintentar" class="btn btn-primary">↻ REINTENTAR</button>
+                    <a href="index.html" class="btn btn-secondary">← VOLVER</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" style="position: fixed; bottom: 10px; left: 0; right: 0;">
+        Copyright ArtyomStkr
+    </footer>
+
+    <script src="js/logica.js"></script>
+    <script>
+        const dificultades = {
+            facil: { filas: 8, columnas: 8, minas: 10 },
+            normal: { filas: 10, columnas: 10, minas: 20 },
+            dificil: { filas: 12, columnas: 12, minas: 30 }
+        };
+
+        document.querySelectorAll('.btn-dificultad').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const dif = btn.dataset.dificultad;
+                localStorage.setItem('buscaminasDificultad', dif);
+                iniciarJuego(dificultades[dif]);
+            });
+        });
+
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            const dif = localStorage.getItem('buscaminasDificultad') || 'facil';
+            iniciarJuego(dificultades[dif]);
+        });
+
+        document.getElementById('btn-flag').addEventListener('click', () => {
+            modoBandera = !modoBandera;
+            document.getElementById('btn-flag').classList.toggle('active');
+        });
+
+        document.getElementById('btn-reintentar').addEventListener('click', () => {
+            document.getElementById('modal-resultado').classList.add('hidden');
+            const dif = localStorage.getItem('buscaminasDificultad') || 'facil';
+            iniciarJuego(dificultades[dif]);
+        });
+    </script>
+</body>
+</html>
